@@ -1,0 +1,21 @@
+{
+  "name": "dl-card-annotator",
+  "version": "1.0.0",
+  "description": "A simple web service used to annotate YuGIOh! cards with ban list and rarity information from the Duel Links game",
+  "main": "app.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mvettosi/dl-card-annotator.git"
+  },
+  "author": "Matteo Vettosi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mvettosi/dl-card-annotator/issues"
+  },
+  "homepage": "https://github.com/mvettosi/dl-card-annotator#readme"
+}
