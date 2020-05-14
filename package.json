@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "A simple web service used to annotate YuGIOh! cards with ban list and rarity information from the Duel Links game",
   "main": "app.js",
-  "dependencies": {},
+  "dependencies": {
+    "canvas": "^2.6.1",
+    "image-data-uri": "^2.0.1",
+    "merge-images": "^2.0.0",
+    "node-cache": "^5.1.0"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
