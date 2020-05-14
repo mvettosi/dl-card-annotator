@@ -6,20 +6,7 @@ const imageDataURI = require('image-data-uri');
 const crypto = require('crypto')
 const LIMITS = ['1', '2', '3']
 const RARITIES = ['N', 'R', 'SR', 'UR']
-
-var http = require("http");
-var port = normalizePort(process.env.PORT || '4000');
-
-function normalizePort(val) {
-  var port = parseInt(val, 10);
-  if (isNaN(port)) {
-    return val;
-  }
-  if (port >= 0) {
-    return port;
-  }
-  return false;
-}
+const http = require("http");
 
 function getInputs(request) {
   var query = url.parse(request.url, true).query;
@@ -114,5 +101,5 @@ var app = function(request, response) {
 }
 
 http.createServer(app).listen(80, function() {
-  console.log(`Server started on port ${port}`);
+  console.log('Server started');
 });
