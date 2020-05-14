@@ -4,9 +4,15 @@ const mergeImages = require('merge-images');
 const { Canvas, Image } = require('canvas');
 const imageDataURI = require('image-data-uri');
 const crypto = require('crypto')
+const probe = require('probe-image-size');
+const http = require("http");
+
 const LIMITS = ['1', '2', '3']
 const RARITIES = ['N', 'R', 'SR', 'UR']
-const http = require("http");
+const RARITY_WIDTH = 160
+const RARITY_HEIGHT = 40
+const LIMIT_WIDTH = 60
+const LIMIT_HEIGHT = 60
 
 function getInputs(request) {
   var query = url.parse(request.url, true).query;
@@ -37,19 +43,19 @@ function getHash(inputs) {
   return crypto.createHash('sha1').update(combined).digest('hex');
 }
 
-function buildImage(inputs) {
+function buildImage(cardSizes, inputs) {
   var images = [
-    {src: inputs.card, x: 0, y: 40},
-    {src: `img/${inputs.rarity}.png`, x: 261, y: 0}
+    {src: inputs.card, x: 0, y: RARITY_HEIGHT},
+    {src: `img/${inputs.rarity}.png`, x: cardSizes.width - RARITY_WIDTH, y: 0}
   ];
   if (inputs.limit !== 'undefined') {
-    images.push({src: `img/limited-${inputs.limit}.png`, x: 0, y: 40})
+    images.push({src: `img/limited-${inputs.limit}.png`, x: 0, y: RARITY_HEIGHT})
   }
 
   return mergeImages(images, {
       Canvas: Canvas,
       Image: Image,
-      width: 421,
+      width: cardSizes.width,
       height: 654
     })
 }
@@ -85,8 +91,10 @@ var app = function(request, response) {
   var target = `data/${hash}.png`;
   if (!fs.existsSync(target)) {
     console.log('No cached build found, creating...')
-    // make image
-    buildImage(inputs)
+    // Get card sizes
+    probe(inputs.card)
+    // then make image
+    .then(result => buildImage(result, inputs))
     // then save to file
     .then(b64 => imageDataURI.outputFile(b64, target))
     // then cache file path with hash and return the file
