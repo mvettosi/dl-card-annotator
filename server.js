@@ -7,12 +7,12 @@ const crypto = require('crypto')
 const probe = require('probe-image-size');
 const http = require("http");
 
-const LIMITS = ['1', '2', '3']
+const LIMITS = ['0', '1', '2', '3']
 const RARITIES = ['N', 'R', 'SR', 'UR']
 const RARITY_WIDTH = 160
 const RARITY_HEIGHT = 40
-const LIMIT_WIDTH = 60
-const LIMIT_HEIGHT = 60
+const LIMIT_WIDTH = 100
+const LIMIT_HEIGHT = 100
 
 function getInputs(request) {
   var query = url.parse(request.url, true).query;
@@ -56,7 +56,7 @@ function buildImage(cardSizes, inputs) {
       Canvas: Canvas,
       Image: Image,
       width: cardSizes.width,
-      height: 654
+      height: cardSizes.height + RARITY_HEIGHT
     })
 }
 
