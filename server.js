@@ -113,6 +113,6 @@ var app = function(request, response) {
   }
 }
 
-http.createServer(app).listen(port, function() {
+http.createServer(app).listen(80, function() {
   console.log(`Server started on port ${port}`);
 });
