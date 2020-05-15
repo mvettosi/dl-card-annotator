@@ -30,7 +30,8 @@ function getInputs(request) {
       result = {
         card: query.url,
         limit: query.limit || 'undefined',
-        rarity: query.rarity
+        rarity: query.rarity,
+        fresh: typeof query.fresh !== 'undefined' && ( query.fresh === 'true' || query.fresh === true ) ? true : false
       };
       console.log(`Received inputs: ${JSON.stringify(result)}`)
   }
@@ -86,11 +87,17 @@ var app = function(request, response) {
 
   // Calculate hash using the 3
   var hash = getHash(inputs);
+  console.log(`Calculated hash: ${hash}`)
 
   // if hash not cached:
   var target = `data/${hash}.png`;
-  if (!fs.existsSync(target)) {
-    console.log('No cached build found, creating...')
+  if (!fs.existsSync(target) || inputs.fresh) {
+    if (inputs.fresh) {
+      console.log('New image requested, re-creating...');
+      fs.unlinkSync(target);
+    } else {
+      console.log('No cached build found, creating...');
+    }
     // Get card sizes
     probe(inputs.card)
     // then make image
