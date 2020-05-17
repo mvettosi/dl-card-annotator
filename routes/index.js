@@ -28,7 +28,6 @@ router.post('/', [
 
   // Set default values
   req.body.fresh = req.body.fresh || false
-  console.log(req.body);
 
   annotator.annotate(req.body)
     .then(image => res.send({

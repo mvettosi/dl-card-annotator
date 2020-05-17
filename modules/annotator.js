@@ -53,6 +53,7 @@ exports.LIMITS = ['0', '1', '2', '3']
 exports.annotate = function(inputs) {
   return new Promise((resolve, reject) => {
     console.log('');
+    console.log(inputs);
 
     // Calculate hash using the 3
     var hash = getHash(inputs);
