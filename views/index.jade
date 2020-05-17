@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  p #{title} to generate and serve Duel Links cards with added rarity and forbidden/limited badges.
+  p To generate an url, post a json with these fields:
+  ul
+    li "url": url of the card to annotate
+    li "rarity": one of N, R, SD and UR
+    li "limit": optional, an integer between 0 and 3 (inclusive)

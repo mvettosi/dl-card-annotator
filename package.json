@@ -2,16 +2,22 @@
   "name": "dl-card-annotator",
   "version": "1.0.0",
   "description": "A simple web service used to annotate YuGIOh! cards with ban list and rarity information from the Duel Links game",
-  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
   "dependencies": {
     "canvas": "^2.6.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-validator": "^6.4.1",
+    "http-errors": "~1.6.3",
     "image-data-uri": "^2.0.1",
+    "jade": "~1.11.0",
     "merge-images": "^2.0.0",
+    "morgan": "~1.9.1",
     "probe-image-size": "^5.0.0"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
